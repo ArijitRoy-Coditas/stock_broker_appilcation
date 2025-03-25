@@ -1,0 +1,7 @@
+host: localhost
+port: 5432
+username: postgres
+password: Ari22Jit@
+dbName: stock_broker_application
+timezone: Asia/kolkata
+sslmode: disable
