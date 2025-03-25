@@ -20,3 +20,17 @@ const (
 	FieldStrongPassword  = "strongPassword"
 	FieldPhoneNumber     = "PhoneNumber"
 )
+
+// Migration success Message
+const (
+	MsgDBMigrationSuccess = "Database migration completed successfully!"
+)
+
+const (
+	Postgres = "postgres"
+	Yaml     = "yaml"
+)
+
+const (
+	DSNString = "host=%s port=%s user=%s password=%s dbname=%s sslmode=%s TimeZone=%s"
+)

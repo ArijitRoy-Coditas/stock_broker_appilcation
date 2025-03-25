@@ -7,11 +7,14 @@ const (
 	ErrDBConnectionFailed = "Error connecting to database: %s"
 )
 
-// Database Initialization & Migration Messages
+// Database Initialization & Config Errors
 const (
-	ErrDBInitFailed       = "Error initializing database: %s"            // Database initialization failure
-	ErrDBMigrationFailed  = "Error migrating database: %s"               // Database migration failure
-	MsgDBMigrationSuccess = "Database migration completed successfully!" // Successful migration message
+	ErrDBInitFailed             = "Error initializing database: %s"
+	ErrDBMigrationFailed        = "Error migrating database: %s"
+	ErrLoadConfigFailed         = "failed to load config: %v"
+	ErrPostgresConnectionFailed = "failed to connect with the postgres: %s"
+	ErrReadConfigFailed         = "failed to read the config file: %s"
+	ErrUnmarshallConfigFailed   = "failed to unmarshal the config file %s"
 )
 
 const (
