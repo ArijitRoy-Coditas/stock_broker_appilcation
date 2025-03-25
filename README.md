@@ -23,19 +23,27 @@ This document provides an overview of the user creation functionality implemente
 **Request Body:**
 ```json
 {
-  "username": "John Doe",
-  "email": "johndoe@example.com",
-  "password": "SecurePass@123",
-  "confirmPassword": "SecurePass@123",
-  "phoneNumber": "1234567890",
-  "panCard": "ABCDE1234F"
+  "username": "john_do",
+  "password": "SECUREPASs1@",
+  "confirmPassword": "SECUREPASs1@",
+  "panCard": "ABCDE1234F",
+  "phoneNumber": 9876543210,
+  "email": "johnDoe10.doe@example.com"
 }
 ```
 
 **Responses:**
 - `201 Created`: User created successfully.
-- `400 Bad Request`: Invalid input payload.
+![alt text](image.png)
+- `400 Bad Request`: Bad Request.
+![alt text](image-2.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
+![alt text](image-6.png)
+![alt text](image-7.png)
+![alt text](image-8.png)
 - `409 Conflict`: User already exists.
+![alt text](image-1.png)
 - `500 Internal Server Error`: Server issue.
 
 ## Running the Application
