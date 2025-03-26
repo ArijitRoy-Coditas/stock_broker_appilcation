@@ -6,9 +6,9 @@ type BFFCreateUserRequest struct {
 	ConfirmPassword string `json:"confirmPassword" gorm:"column:confirmPassword" example:"Secure@123" validate:"required,min=8,eqfield=Password"`
 	PanCard         string `json:"panCard" gorm:"column:panCard" example:"EQZRP1234P" validate:"required,panCard"`
 	PhoneNumber     uint64 `json:"phoneNumber" gorm:"column:phoneNumber" example:"7568912340" validate:"required,min=1000000000,max=9999999999"`
-	Email           string `json:"email" example:"arijit@gmail.com" validate:"required,email"`
+	Email           string `json:"email" example:"arijit@gmail.com" validate:"required,Email"`
 }
 
 type BFFCreateUserResponse struct {
-	Message string `json:"message" example:"user is created successfully"`
+	Message string `json:"message" example:"user created successfully"`
 }

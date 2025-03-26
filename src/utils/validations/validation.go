@@ -68,6 +68,8 @@ func FormatValidationErrors(err error) ([]models.ErrorMessage, string) {
 				errorMsg = constants.ErrInvalidPanCard
 			case constants.FieldPhoneNumber:
 				errorMsg = constants.ErrInvalidPhoneNumber
+			case constants.FieldEmail:
+				errorMsg = constants.ErrInvalidEmail
 			default:
 				errorMsg = fmt.Sprintf(constants.ErrInvalidValue, err.Field())
 			}
@@ -94,10 +96,39 @@ func strongPasswordValidator(f1 validator.FieldLevel) bool {
 	return matched
 }
 
+func IsEmailValid(f1 validator.FieldLevel) bool {
+	email := f1.Field().String()
+
+	// Split email into local part and domain part
+	parts := strings.Split(email, "@")
+	if len(parts) != 2 {
+		return false
+	}
+
+	domainParts := strings.Split(parts[1], ".")
+
+	if len(domainParts) < 2 || len(domainParts) > 3 {
+		return false
+	}
+
+	for i := 0; i < len(domainParts)-1; i++ {
+		for j := i + 1; j < len(domainParts); j++ {
+			if domainParts[i] == domainParts[j] {
+				return false
+			}
+		}
+	}
+
+	EmailRegex := regexp.MustCompile(constants.EmailRegex)
+
+	return EmailRegex.MatchString(email)
+}
+
 func init() {
 	bffValidator = validator.New()
 	bffValidator.RegisterValidation("panCard", panCardValidator)
 	bffValidator.RegisterValidation("strongPassword", strongPasswordValidator)
+	bffValidator.RegisterValidation("Email", IsEmailValid)
 }
 
 func GetBFFValidator() *validator.Validate {

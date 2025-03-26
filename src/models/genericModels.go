@@ -9,3 +9,8 @@ type ErrorAPIResponse struct {
 	Message ErrorMessage `json:"errors,omitempty"`
 	Error   string       `json:"error,omitempty"`
 }
+
+type JWT struct {
+	AccessSecretKey  string
+	RefreshSecretKey string
+}

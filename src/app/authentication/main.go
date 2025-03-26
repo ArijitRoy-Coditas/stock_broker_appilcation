@@ -12,10 +12,15 @@ import (
 )
 
 func main() {
-	err := utils.InitPostgresConfg("../../config")
-	if err != nil {
+
+	if err := utils.InitPostgresConfg(constants.BaseConfig); err != nil {
 		log.Fatalf(constants.ErrDBConnectionFailed, err)
 	}
+
+	if err := utils.InitJWTConfig(constants.BaseConfig); err != nil {
+		log.Fatalf(constants.ErrJWTConfigReadFailed, err)
+	}
+
 	startRouter()
 }
 

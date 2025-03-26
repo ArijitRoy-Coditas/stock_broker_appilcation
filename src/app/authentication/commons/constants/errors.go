@@ -36,3 +36,11 @@ const (
 const (
 	ErrFailedToEncrypt = "falied to encrpyt password"
 )
+
+//Signin and Token generation Errors
+const (
+	ErrInvalidEmailorPassword = "invalid email or password"
+	ErrPasswordMismatch       = "password does not match %w"
+	ErrAuthenticationFailed   = "authentication failed"
+	ErrTokenGenerationFailed  = "failed to generate authentication tokens %s"
+)

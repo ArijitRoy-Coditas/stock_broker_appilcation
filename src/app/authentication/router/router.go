@@ -8,6 +8,8 @@ import (
 	"authentication/middleware"
 	"authentication/repository"
 
+	genericConstants "stock_broker_application/src/constants"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	files "github.com/swaggo/files"
@@ -24,17 +26,22 @@ func GetRouter() *gin.Engine {
 	router.GET(constants.SwaggerRoute, ginSwagger.WrapHandler(files.Handler))
 
 	router.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"*"},
-		AllowMethods: []string{"POST", "GET"},
-		AllowHeaders: []string{"Origin", "Content-Type", "Authorization"},
+		AllowOrigins: []string{genericConstants.AllowedOrigin},
+		AllowMethods: []string{genericConstants.POST, genericConstants.GET},
+		AllowHeaders: []string{genericConstants.Origin, genericConstants.ContentType, genericConstants.Authorization},
 	}))
 
 	createUserRepository := repository.NewCreateUserRepository()
 	createUserService := business.NewCreateUserService(createUserRepository)
 	createUserHandler := handlers.NewCreateUserHandler(createUserService)
-	authGroup := router.Group("/api/auth")
+
+	signinUserReporsitory := repository.NewSignInUser()
+	signinUserService := business.NewSigninUserService(signinUserReporsitory)
+	signinUserHandler := handlers.NewSigninUserHandler(*signinUserService)
+	authGroup := router.Group(constants.AuthRoutePrefix)
 	{
-		authGroup.POST(constants.Signup, createUserHandler.HandlerCreaterUser)
+		authGroup.POST(constants.Signup, createUserHandler.HandleCreaterUser)
+		authGroup.POST(constants.Signin, signinUserHandler.HandleUserSignin)
 	}
 
 	return router

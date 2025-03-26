@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"os"
 	"stock_broker_application/src/constants"
-	"stock_broker_application/src/models"
 
 	"github.com/spf13/viper"
 )
 
-func LoadConfig(configPath, configFile, configType string) (*models.PostgresConfig, error) {
-	var postgresConfig models.PostgresConfig
+func LoadConfig[T any](configPath, configFile, configType string) (*T, error) {
+	var config T
 
 	viper.AddConfigPath(configPath)
 	viper.SetConfigName(configFile)
@@ -20,9 +19,9 @@ func LoadConfig(configPath, configFile, configType string) (*models.PostgresConf
 		return nil, fmt.Errorf(constants.ErrReadConfigFailed, err)
 	}
 
-	if err := viper.Unmarshal(&postgresConfig); err != nil {
+	if err := viper.Unmarshal(&config); err != nil {
 		return nil, fmt.Errorf(constants.ErrUnmarshallConfigFailed, err)
 	}
-
-	return &postgresConfig, nil
+	fmt.Print(config)
+	return &config, nil
 }

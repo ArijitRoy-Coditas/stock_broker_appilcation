@@ -15,7 +15,7 @@ var postgresConfig *models.PostgresConfig
 
 func InitPostgresConfg(configPath string) error {
 
-	if err := initConfig(configPath); err != nil {
+	if err := initPostgresConfig(configPath); err != nil {
 		return fmt.Errorf(constants.ErrLoadConfigFailed, err)
 	}
 	dns := fmt.Sprintf(constants.DSNString, postgresConfig.Host, postgresConfig.Port, postgresConfig.Username, postgresConfig.Password, postgresConfig.DBName, postgresConfig.SSLMode, postgresConfig.Timezone)
@@ -37,9 +37,9 @@ func GetPostgresClient() *models.DatabaseConfiguration {
 	return postgresClient
 }
 
-func initConfig(configPath string) error {
+func initPostgresConfig(configPath string) error {
 	var err error
-	postgresConfig, err = configs.LoadConfig(configPath, constants.Postgres, constants.Yaml)
+	postgresConfig, err = configs.LoadConfig[models.PostgresConfig](configPath, constants.Postgres, constants.Yaml)
 	if err != nil {
 		return err
 	}

@@ -35,7 +35,7 @@ func NewCreateUserHandler(service *business.CreateUserService) *CreaterUserHandl
 // @Failure 409 {object} models.ErrorAPIResponse "User already exists"
 // @Failure 500 {object} models.ErrorAPIResponse "Internal Server Error"
 // @Router /api/auth/signup [post]
-func (controller *CreaterUserHandler) HandlerCreaterUser(ctx *gin.Context) {
+func (controller *CreaterUserHandler) HandleCreaterUser(ctx *gin.Context) {
 
 	var bffCreateUserRequest models.BFFCreateUserRequest
 	if err := ctx.ShouldBind(&bffCreateUserRequest); err != nil {

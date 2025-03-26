@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	err := utils.InitPostgresConfg("./src/config")
+	err := utils.InitPostgresConfg(constants.RootConfig)
 	if err != nil {
 		log.Fatalf(constants.ErrDBInitFailed, err)
 		return

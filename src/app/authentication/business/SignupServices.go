@@ -7,8 +7,6 @@ import (
 	"fmt"
 	genericErrors "stock_broker_application/src/constants"
 	"stock_broker_application/src/utils"
-
-	"github.com/gin-gonic/gin"
 )
 
 type CreateUserService struct {
@@ -21,7 +19,7 @@ func NewCreateUserService(createUserRepository repository.CreateUserRepository) 
 	}
 }
 
-func (service *CreateUserService) CreateNewUser(ctx *gin.Context, spanCtx context.Context, bffCreateUserRequest models.BFFCreateUserRequest) error {
+func (service *CreateUserService) CreateNewUser(ctx context.Context, spanCtx context.Context, bffCreateUserRequest models.BFFCreateUserRequest) error {
 	postgresClinet := utils.GetPostgresClient()
 	tx := postgresClinet.GormDB.Begin()
 
