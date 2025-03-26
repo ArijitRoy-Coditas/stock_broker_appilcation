@@ -42,12 +42,10 @@ func FormatValidationErrors(err error) ([]models.ErrorMessage, string) {
 	for _, err := range err.(validator.ValidationErrors) {
 		var errorMsg string
 		fieldName := err.Field()
-		// Handle required fields first
 		if err.Tag() == "required" {
 			fieldName = strings.ToLower(fieldName)
 			errorMsg = fmt.Sprintf(constants.ErrFieldRequired, fieldName)
 		} else {
-			// Custom handling for specific fields
 			switch err.Field() {
 			case constants.FieldPassword:
 				passwordErrors := ValidatePasswordConstraints(err.Value().(string))
@@ -58,7 +56,7 @@ func FormatValidationErrors(err error) ([]models.ErrorMessage, string) {
 							ErrorMessage: msg,
 						})
 					}
-					continue // Skip adding the generic message
+					continue
 				}
 			case constants.FieldConfirmPassword:
 				if err.Tag() == "eqfield" {

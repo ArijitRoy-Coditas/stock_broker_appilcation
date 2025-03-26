@@ -46,6 +46,27 @@ This document provides an overview of the user creation functionality implemente
 ![alt text](image-1.png)
 - `500 Internal Server Error`: Server issue.
 
+### Sign In
+**Endpoint:** `POST /api/auth/signin`
+
+**Request Body:**
+```json
+{
+  "email": "johnDoe10.doe@example.com",
+  "password": "SECUREPASs1@"
+}
+```
+
+**Responses:**
+- `200 OK`: Sign in successful.
+![alt text](image-3.png)
+- `400 Bad Request`: Invalid request payload.
+![alt text](image-11.png)
+![alt text](image-9.png)
+- `401 Unauthorized`: Invalid email or password.
+![alt text](image-10.png)
+- `500 Internal Server Error`: Server issue.
+
 ## Running the Application
 ### Prerequisites
 - Install [Go](https://go.dev/doc/install)
@@ -72,4 +93,3 @@ This document provides an overview of the user creation functionality implemente
 ## Notes
 - Ensure the database is running and the connection is configured correctly.
 - Modify `docs.SwaggerInfo.Host` if running on a different port.
-
